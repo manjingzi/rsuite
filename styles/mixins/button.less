@@ -155,8 +155,8 @@
 }
 
 .btn-link-variant(@color) {
-  @color-dark: color(~`palette('@{color}', 600) `);
-  @color-darker: color(~`palette('@{color}', 700) `);
+  @color-dark: color(~`palette('@{color}', 800) `);
+  @color-darker: color(~`palette('@{color}', 900) `);
 
   color: @color;
   font-weight: normal;
@@ -186,7 +186,6 @@
 
   &:active {
     color: @color-darker;
-    text-decoration: none;
 
     &:hover,
     &:focus,
@@ -249,10 +248,10 @@
 }
 
 .btn-ghost-variant(@color,@border-color) {
-  @color-dark: color(~`palette('@{color}', 600) `);
-  @color-darker: color(~`palette('@{color}', 700) `);
-  @color-border-dark: color(~`palette('@{color}', 600) `);
-  @color-border-darker: color(~`palette('@{color}', 700) `);
+  @color-dark: color(~`palette('@{color}', 800) `);
+  @color-darker: color(~`palette('@{color}', 900) `);
+  @color-border-dark: color(~`palette('@{color}', 800) `);
+  @color-border-darker: color(~`palette('@{color}', 900) `);
 
   color: @color;
   border: 1px solid @border-color;
@@ -358,7 +357,8 @@
 .generate-spectrum-link-btns(@i:length(@spectrum)) when (@i>0) {
   .generate-spectrum-link-btns(@i - 1);
   @name: extract(@spectrum, @i);
-  @color: @@name;
+  @base-color: @@name;
+  @color: color(~`palette('@{base-color}', 700) `);
 
   &.@{ns}btn-@{name} {
     .btn-link-variant(@color);
@@ -378,7 +378,8 @@
 .generate-spectrum-ghost-btns(@i:length(@spectrum)) when (@i>0) {
   .generate-spectrum-ghost-btns(@i - 1);
   @name: extract(@spectrum, @i);
-  @color: @@name;
+  @base-color: @@name;
+  @color: color(~`palette('@{base-color}', 700) `);
   @border-color: @color;
 
   &.@{ns}btn-@{name} {
@@ -469,36 +470,60 @@
 
 // Base sizes
 .btn-sm(base) {
-  .button-size(base; @padding-small-vertical; @padding-small-horizontal; @font-size-base; @line-height-base; @btn-border-radius-small);
+  .button-size(
+    base; @padding-small-vertical; @padding-small-horizontal; @font-size-base; @line-height-base;
+      @btn-border-radius-small
+  );
 }
 
 .btn-md(base) {
-  .button-size(base; @padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
+  .button-size(
+    base; @padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base;
+      @btn-border-radius-base
+  );
 }
 
 .btn-xs(base) {
-  .button-size(base; @padding-extra-small-vertical; @padding-extra-small-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
+  .button-size(
+    base; @padding-extra-small-vertical; @padding-extra-small-horizontal; @font-size-small;
+      @line-height-small; @btn-border-radius-small
+  );
 }
 
 .btn-lg(base) {
-  .button-size(base; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @btn-border-radius-large);
+  .button-size(
+    base; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large;
+      @btn-border-radius-large
+  );
 }
 
 // Full sizes
 .btn-sm() {
-  .button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-base; @line-height-base; @btn-border-radius-small);
+  .button-size(
+    @padding-small-vertical; @padding-small-horizontal; @font-size-base; @line-height-base;
+      @btn-border-radius-small
+  );
 }
 
 .btn-md() {
-  .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
+  .button-size(
+    @padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base;
+      @btn-border-radius-base
+  );
 }
 
 .btn-xs() {
-  .button-size(@padding-extra-small-vertical; @padding-extra-small-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
+  .button-size(
+    @padding-extra-small-vertical; @padding-extra-small-horizontal; @font-size-small;
+      @line-height-small; @btn-border-radius-small
+  );
 }
 
 .btn-lg() {
-  .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @btn-border-radius-large);
+  .button-size(
+    @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large;
+      @btn-border-radius-large
+  );
 }
 
 // Button ripple
@@ -518,7 +543,8 @@
       transition: 0s;
 
       &-rippling {
-        transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
         transform: scale(1);
         opacity: 0;
       }
